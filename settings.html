@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="js/console.log.js"></script>
+		<script type="text/javascript" src="js/font-picker.js"></script>
+		<script type="text/javascript" src="js/color-picker.js"></script>
+		<script type="text/javascript">
+			System.Gadget.onSettingsClosing = function(e) {
+				fontPicker.settingsClosing(e);
+				colorPicker.settingsClosing(e);
+				setScale(e);
+				
+				System.Gadget.Settings.write('opacity', document.getElementById('foregroundOpacity').value);
+				// System.Gadget.Settings.write('negativeVerticalMargin', document.getElementById('negativeVerticalMargin').value);
+				// System.Gadget.Settings.write('negativeHorizontalMargin', document.getElementById('negativeHorizontalMargin').value);
+			}
+
+			function setScale(e) {
+				if (e.closeAction == e.Action.commit) {
+					System.Gadget.Settings.writeString('scale', document.getElementById('clockScale').value);
+				}
+			}
+
+			function init() {
+				fontPicker.init();
+				colorPicker.init();
+
+				document.getElementById('foregroundOpacity').value = System.Gadget.Settings.read('opacity') || 30;
+				document.getElementById('clockScale').value = System.Gadget.Settings.read('scale') || 1;
+				// document.getElementById('negativeVerticalMargin').value = System.Gadget.Settings.read('negativeVerticalMargin') || 0;
+				// document.getElementById('negativeHorizontalMargin').value = System.Gadget.Settings.read('negativeHorizontalMargin') || 0;
+			}
+
+
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="css/settings.css" />
+	</head>
+	<body onload="init();" onclick="fontPicker.showFontMenu(-1, 0, 0); colorPicker.showColorMenu(-1, 0, 0);">
+		<table>
+			<tr>
+				<td>Pick a font:</td>
+			</tr>
+			<tr>
+				<td>
+					<div onclick="javascript:fontPicker.showFontMenu(0, 1, 38); event.cancelBubble=true;" style="height:22px; width:220px; overflow:hidden;" onMouseOver="fontDropPNG.src='images/dropmenuhover.png'" onMouseOut="javascript:if(fontPicker.selectingFont!=0) fontDropPNG.src='images/dropmenu.png'" onKeyDown="fontPicker.keyPress(0)">
+						<img id="fontDropPNG" src="images/dropmenu.png" />
+						<div style="position:relative; top:-22px; left:5px; width:195px; height:17px; overflow:hidden; white-space:nowrap;">
+							<div style="position:absolute; top:50%;">
+								<div id="divFonttype" style="position:relative; top:-50%;"></div>
+							</div>
+						</div>
+					</div>
+
+					<!--
+					<input unselectable="on" type="checkbox" id="divFonttypeBold" onclick="setFontStyle(0)">Bold
+					<input unselectable="on" type="checkbox" id="divFonttypeItalic" onclick="setFontStyle(0)">Italic
+					-->
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td>Pick a color:</td>
+			</tr>
+			<tr>
+				<td>
+					<div onclick="javascript:colorPicker.showColorMenu(0, 1, 79); event.cancelBubble=true;" style="height:22px; width:220px; overflow:hidden;" onMouseOver="colorDropPNG.src='images/dropmenuhover.png'" onMouseOut="javascript:if(colorPicker.selectingColor!=0) colorDropPNG.src='images/dropmenu.png'" onKeyDown="colorPicker.keyPress(0)">
+						<img id="colorDropPNG" src="images/dropmenu.png" />
+						<div style="position:relative; top:-22px; left:5px; width:195px; height:17px; overflow:hidden; white-space:nowrap;">
+							<div style="position:absolute; top:50%;">
+								<div id="divColortype" style="position:relative; top:-50%;"></div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td>Foreground opacity:</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="foregroundOpacity" type="text" size="2" onkeyup="this.value=this.value.replace(/[^\d]/, '');">%
+				</td>
+			</tr>
+
+			<tr>
+				<td>Clock Scale:</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="clockScale" type="text" size="2" onkeyup="this.value=this.value.replace(/[^\d\.]/, '');">
+				</td>
+			</tr>
+
+			<!--
+			<tr>
+				<td>Negative margins:</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="negativeVerticalMargin" type="text" size="2" onkeyup="this.value=this.value.replace(/[^\d]/, '');">px (Y), 
+					<input id="negativeHorizontalMargin" type="text" size="2" onkeyup="this.value=this.value.replace(/[^\d]/, '');">px (X)
+				</td>
+			</tr>
+			-->
+		</table>
+
+
+		<div id="colorMenu" class="menusurround" style="display:none;">
+			<table id="tdColors" style="position:absolute; top:0px; left:0px;" cellspacing="0" onMouseOut="javascript:colorPicker.mouseOver(false, this.rows((event.srcElement.parentNode.rowIndex!=null) ? event.srcElement.parentNode.rowIndex : event.srcElement.parentNode.parentNode.rowIndex))" onMouseOver="javascript:colorPicker.mouseOver(true, this.rows((event.srcElement.parentNode.rowIndex!=null) ? event.srcElement.parentNode.rowIndex : event.srcElement.parentNode.parentNode.rowIndex));" onClick="javascript:colorPicker.setColor(event.srcElement.parentNode.rowIndex); colorPicker.showColorMenu(-1, 0, 0); event.cancelBubble=true;"></table>
+		</div>
+
+		<div id="fontMenu" class="menusurround" style="display:none;">
+			<table id="tdFonts" style="position:absolute; top:0px; left:0px;" cellspacing="0" onMouseOut="javascript:fontPicker.mouseOver(false, this.rows((event.srcElement.parentNode.rowIndex!=null) ? event.srcElement.parentNode.rowIndex : event.srcElement.parentNode.parentNode.rowIndex))" onMouseOver="javascript:fontPicker.mouseOver(true, this.rows((event.srcElement.parentNode.rowIndex!=null) ? event.srcElement.parentNode.rowIndex : event.srcElement.parentNode.parentNode.rowIndex));" onClick="javascript:fontPicker.setFont(event.srcElement.parentNode.rowIndex); fontPicker.showFontMenu(-1, 0, 0); event.cancelBubble=true;"></table>
+		</div>
+
+		<div class="about">
+			<a href="https://github.com/tyrsius/clock-gadget">HUD Time homepage</a>
+		</div>
+
+	</body>
+</html>

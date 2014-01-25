@@ -1,0 +1,84 @@
+* {
+	font-family: Segoe UI;
+	font-size: 12px;
+}
+	
+body{ 
+	width: 221px;
+	height: 294px;
+	margin: 0px;
+	position: relative;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.about {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+.menusurround {
+	position: absolute;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 150px;
+	width: 220px;
+	border: 1px 1px 1px 1px solid;
+	border-color: rgb(151,151,151);
+	border-spacing: 0px;
+	z-index: 100;
+}
+
+/* Menu item */
+.menuItem td{
+	border-style: solid;
+	border-width: 1px 0px 1px 0px;
+	border-color: rgb(245,245,245) rgb(226,226,226) rgb(245,245,245) rgb(245,245,245);
+	background-color: rgb(245,245,245);
+	font-size: 18px;
+	padding: 0px 4px 0px 4px;
+	white-space: nowrap;
+	height: 22px;
+	overflow: hidden;
+}
+
+.menuItemSelected td{
+	border-style: solid;
+	border-width: 1px 0px 1px 0px;
+	border-color: rgb(245,245,245) rgb(226,226,226) rgb(245,245,245) rgb(245,245,245);
+	background-color: rgb(255,214,109);
+	font-size: 18px;
+	padding: 0px 4px 0px 4px;
+	white-space: nowrap;
+	height: 22px;
+	overflow: hidden;
+}
+
+/* Menu item when mouse over */
+.menuItemHover td{
+	border-style: solid;
+	border-width: 1px 0px 1px 0px;
+	border-color: rgb(170,218,237) rgb(228,241,247) rgb(170,218,237) rgb(228,241,247);
+	background-color: rgb(228,241,247);
+	font-size: 18px;
+	padding: 0px 4px 0px 4px;
+	white-space: nowrap;
+	height: 22px;
+	overflow: hidden;
+}
+
+/* Selected menu item when mouse over */
+.menuItemHoverSelected td{
+	border-style: solid;
+	border-width: 1px 0px 1px 0px;
+	border-color: rgb(170,218,237) rgb(228,241,247) rgb(170,218,237) rgb(228,241,247);
+	background-color: rgb(255,222,133);
+	font-size: 18px;
+	padding: 0px 4px 0px 4px;
+	white-space: nowrap;
+	height: 22px;
+	overflow: hidden;
+}

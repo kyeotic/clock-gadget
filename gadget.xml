@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gadget>
+  <name>HUD Time</name>
+  <namespace>microsoft.windows</namespace>
+
+  <version value="2.2.0.0" MinPlatformVersion ="0.3">2.2.0.0</version>
+  <copyright>&#169; 2009</copyright>
+  <description>"Heads up display" style time and date</description>
+  <author name="Factor Mystic">
+    <info url="http://factormystic.net/projects/gadgets/hud-time" />
+  </author>
+  <icons>
+    <icon src="images/logo.png" />
+  </icons>
+
+  <hosts>
+    <host name="sidebar">
+      <base type="HTML" apiVersion="1.0.0" src="content.html"/>
+      <permissions>Full</permissions>
+      <platform minPlatformVersion="1.0"/>
+    </host>
+  </hosts>
+</gadget>
